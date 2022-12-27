@@ -42,9 +42,9 @@ const Sidebar = () => {
             </div>
           )}
 
-          <Discover />
+          {/* <Discover />
           <SuggestedAccounts />
-          <Footer />
+          <Footer /> */}
         </div>
       )}
     </div>
