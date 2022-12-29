@@ -1,14 +1,9 @@
 // Controller
 import { NextApiRequest, NextApiResponse } from "next";
 import { type } from "os";
+import Posts from "../model/post";
 import Users from "../model/user";
-
-type User = {
-  name: string;
-  email: string;
-  avatar: string;
-  date: Date;
-};
+import { User } from "../types";
 
 //Get users
 export async function getUsers(
@@ -99,5 +94,71 @@ export async function deleteUser(
     res.status(404).json({ error: "User not selected" });
   } catch (error) {
     res.status(404).json({ error: "Error while Deleting Data" });
+  }
+}
+
+//Get posts
+export async function getPosts(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
+  try {
+    //Mongoose find all function sorted by date
+    const posts = await Posts.find({}).sort({ date: -1 });
+
+    //If collection is not found in database
+    if (!posts) return res.status(404).json({ error: "Posts not found" });
+
+    //Sending posts as response
+    res.status(200).json(posts);
+  } catch (error: any) {
+    res.status(404).json({ error: "Error while fetching Posts" });
+  }
+}
+
+//Post a Post
+export async function postPost(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
+  try {
+    const formData = req.body;
+    if (!formData) return res.status(404).json({ error: "Data not Provided" });
+
+    //Mongoose Create User
+    Posts.create(formData, function (err: any, data: any) {
+      return res.status(200).json(data);
+    });
+  } catch (error) {
+    res.status(404).json({ error: "Error while posting Data" });
+  }
+}
+
+//Create new user
+export async function getUserByEmail(
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
+    }
+
+    const user = await Users.findOne({ email }).exec();
+    if (user) return res.status(200).json(user);
+
+    if (!user) {
+      //create a new user
+      const newUser = await Users.create(
+        req.body,
+        function (err: any, data: any) {
+          return res.status(200).json(data);
+        }
+      );
+    }
+  } catch (error) {
+    return res.status(404).json({ error: "Cannot get the User" });
   }
 }

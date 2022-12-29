@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { AiFillHome, AiOutlineMenu } from "react-icons/ai";
 import { ImCancelCircle } from "react-icons/im";
+import Discover from "./Discover";
+import Footer from "./Footer";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true);
@@ -35,16 +37,16 @@ const Sidebar = () => {
             <div className='px-2 py-4 hidden xl:block'>
               <p className='text-gray-400'>Login in to like and comment</p>
               <div className='pr-4'>
-                <button className='bg-[#0070BC] text-white font-semibold px-4 py-2 rounded hover:bg-[#00C7E3] transition-all'>
+                <button className='bg-[#0070BC] text-white font-semibold px-4 py-2 rounded hover:bg-[#00C7E3] transition-all w-full'>
                   Google Login
                 </button>
               </div>
             </div>
           )}
 
-          {/* <Discover />
-          <SuggestedAccounts />
-          <Footer /> */}
+          <Discover />
+          {/* <SuggestedAccounts />*/}
+          <Footer />
         </div>
       )}
     </div>

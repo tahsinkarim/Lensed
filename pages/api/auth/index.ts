@@ -1,16 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "../../../database/connectDatabase";
-import {
-  getUsers,
-  postUser,
-  putUser,
-  deleteUser,
-} from "../../../database/controller";
+import { getUserByEmail } from "../../../database/controller";
+import { User } from "../../../types";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
   connectMongo().catch(() =>
     res.status(405).json({ error: "Error in the connection" })
   );
@@ -19,17 +12,8 @@ export default async function handler(
   const { method } = req;
 
   switch (method) {
-    case "GET":
-      getUsers(req, res);
-      break;
     case "POST":
-      postUser(req, res);
-      break;
-    case "PUT":
-      putUser(req, res);
-      break;
-    case "DELETE":
-      deleteUser(req, res);
+      getUserByEmail(req, res);
       break;
     default:
       res.setHeader("Allow", ["GET", "POST", "PUT", "DELETE"]);

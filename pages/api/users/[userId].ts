@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "../../../database/connectDatabase";
 import { getUser } from "../../../database/controller";
+import Users from "../../../model/user";
 
 export default async function handler(
   req: NextApiRequest,
