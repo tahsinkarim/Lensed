@@ -106,15 +106,8 @@ export async function getPosts(
     //Mongoose find all function sorted by date
     const posts = await Posts.find({}).sort({ date: -1 });
 
-    //If collection is not found in database
-    if (!posts) {
-      return res.status(404).json({ error: "Posts not found" });
-    } else {
-      res.status(200).json(posts);
-    }
-
     //Sending posts as response
-    return res.status(200).json(posts);
+    res.status(200).json(posts);
   } catch (error: any) {
     res.status(404).json({ error: "Error while fetching Posts" });
   }
