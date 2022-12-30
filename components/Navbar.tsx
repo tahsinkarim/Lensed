@@ -33,14 +33,14 @@ const Navbar = () => {
                 <span className='hidden md:block'>Upload</span>
               </button>
             </Link>
-            {userProfile.avatar && (
+            {userProfile["avatar"] && (
               <Link href='/'>
                 <>
                   <Image
                     width={40}
                     height={40}
                     className='rounded-full'
-                    src={userProfile.avatar}
+                    src={userProfile["avatar"]}
                     alt='profile photo'
                   />
                 </>
