@@ -12,10 +12,11 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
   switch (method) {
     case "GET":
-      getPosts(req, res);
+      // getPosts(req, res);
+      res.status(200).json({ method, name: "get post" });
       break;
     case "POST":
-      postPost(req, res);
+      // postPost(req, res);
       break;
     case "PUT":
       res.status(200).json({ method, name: "put post" });
