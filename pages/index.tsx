@@ -15,6 +15,8 @@ interface IProps {
 }
 
 const Home = ({ images }: IProps) => {
+  console.log(images);
+
   return (
     <div className='flex flex-col gap-10 videos h-full'>
       {images.length ? (
