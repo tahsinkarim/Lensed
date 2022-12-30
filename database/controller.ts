@@ -107,10 +107,14 @@ export async function getPosts(
     const posts = await Posts.find({}).sort({ date: -1 });
 
     //If collection is not found in database
-    if (!posts) return res.status(404).json({ error: "Posts not found" });
+    if (!posts) {
+      return res.status(404).json({ error: "Posts not found" });
+    } else {
+      res.status(200).json(posts);
+    }
 
     //Sending posts as response
-    res.status(200).json(posts);
+    return res.status(200).json(posts);
   } catch (error: any) {
     res.status(404).json({ error: "Error while fetching Posts" });
   }
