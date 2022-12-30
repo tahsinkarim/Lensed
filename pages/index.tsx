@@ -7,6 +7,7 @@ import axios from "axios";
 import { ImageType } from "../types";
 import NoResults from "../components/NoResults";
 import ImageCard from "../components/ImageCard";
+import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,12 +15,18 @@ interface IProps {
   images: ImageType[];
 }
 
-const Home = ({ images }: IProps) => {
-  console.log(images);
+const Home = () => {
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/post").then((res) => {
+      setImages(res.data);
+    });
+  }, [images]);
 
   return (
     <div className='flex flex-col gap-10 videos h-full'>
-      {images.length ? (
+      {images?.length ? (
         images.map((image: ImageType) => (
           <ImageCard post={image} key={image._id} />
         ))
@@ -30,15 +37,15 @@ const Home = ({ images }: IProps) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const res = await fetch(`http://localhost:3000/api/post`);
-  const data = await res.json();
+// export const getServerSideProps = async () => {
+//   const res = await fetch(`http://localhost:3000/api/post`);
+//   const data = await res.json();
 
-  return {
-    props: {
-      images: data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       images: data,
+//     },
+//   };
+// };
 
 export default Home;
