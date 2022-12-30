@@ -15,7 +15,6 @@ interface IProps {
 }
 
 const Home = ({ images }: IProps) => {
-  console.log(images);
   return (
     <div className='flex flex-col gap-10 videos h-full'>
       {images.length ? (
@@ -30,7 +29,8 @@ const Home = ({ images }: IProps) => {
 };
 
 export const getServerSideProps = async () => {
-  const { data } = await axios.get(`http://localhost:3000/api/post`);
+  const res = await fetch(`http://localhost:3000/api/post`);
+  const data = await res.json();
 
   return {
     props: {
