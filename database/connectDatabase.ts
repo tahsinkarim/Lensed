@@ -1,15 +1,18 @@
 import mongoose from "mongoose";
 
 const connectMongo = async (): Promise<void> => {
-  try {
-    mongoose.set("strictQuery", true);
-    const { connection } = await mongoose.connect(process.env.MONGO_URI!);
-
-    if (connection.readyState == 1) {
-      console.log("Database connection established");
-    }
-  } catch (errors) {
-    return console.error(errors);
+  const MONGO_URI = process.env.MONGO_URI;
+  if (!MONGO_URI) {
+    throw new Error(
+      "Please define the MONGODB_URI environment variable inside .env.local"
+    );
+  }
+  if (mongoose.connections[0].readyState) {
+    console.log("Connected already");
+  } else {
+    mongoose.connect(process.env.MONGO_URI!, () => {
+      console.log("Connected");
+    });
   }
 };
 export default connectMongo;

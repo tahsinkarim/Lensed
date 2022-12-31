@@ -15,15 +15,7 @@ interface IProps {
   images: ImageType[];
 }
 
-const Home = () => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    axios.get("/api/post").then((res) => {
-      setImages(res.data);
-    });
-  }, [images]);
-
+const Home: NextPage<IProps> = ({ images }) => {
   return (
     <div className='flex flex-col gap-10 videos h-full'>
       {images?.length ? (
@@ -37,15 +29,15 @@ const Home = () => {
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const res = await fetch(`http://localhost:3000/api/post`);
-//   const data = await res.json();
+export const getServerSideProps = async () => {
+  const res = await axios.get(`http://localhost:3000/api/post`);
+  const data = await res.data;
 
-//   return {
-//     props: {
-//       images: data,
-//     },
-//   };
-// };
+  return {
+    props: {
+      images: data,
+    },
+  };
+};
 
 export default Home;
