@@ -1,18 +1,16 @@
 import mongoose from "mongoose";
 
 const connectMongo = async (): Promise<void> => {
-  const MONGO_URI = process.env.MONGO_URI;
-  if (!MONGO_URI) {
-    throw new Error(
-      "Please define the MONGODB_URI environment variable inside .env.local"
-    );
-  }
-  if (mongoose.connections[0].readyState) {
-    console.log("Connected already");
-  } else {
-    mongoose.connect(process.env.MONGO_URI!, () => {
-      console.log("Connected");
-    });
+  try {
+    const MONGO_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.k6fgqcn.mongodb.net/lensed?retryWrites=true&w=majority`;
+    mongoose.set("strictQuery", true);
+    const { connection } = await mongoose.connect(MONGO_URI);
+
+    if (connection.readyState == 1) {
+      console.log("Database connection established");
+    }
+  } catch (errors) {
+    return console.error(errors);
   }
 };
 export default connectMongo;
