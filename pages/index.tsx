@@ -34,7 +34,7 @@ export const getServerSideProps = async () => {
   const res = await axios.get(
     `https://lensed-a67lw04nk-tahsinkarim.vercel.app/api/post`
   );
-  const data = await res.data;
+  const { data } = await res.data;
 
   return {
     props: {
