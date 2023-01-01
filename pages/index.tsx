@@ -16,6 +16,7 @@ interface IProps {
 }
 
 const Home: NextPage<IProps> = ({ images }) => {
+  console.log(images);
   return (
     <div className='flex flex-col gap-10 videos h-full'>
       {images?.length ? (
@@ -30,7 +31,9 @@ const Home: NextPage<IProps> = ({ images }) => {
 };
 
 export const getServerSideProps = async () => {
-  const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
+  const res = await axios.get(
+    `https://lensed-a67lw04nk-tahsinkarim.vercel.app/api/post`
+  );
   const data = await res.data;
 
   return {
