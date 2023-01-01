@@ -15,15 +15,7 @@ interface IProps {
   images: ImageType[];
 }
 
-const Home: NextPage = () => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    axios.get("/api/post").then((res) => {
-      setImages(res.data);
-    });
-  }, []);
-
+const Home: NextPage<IProps> = ({ images }) => {
   console.log(images);
   return (
     <div className='flex flex-col gap-10 videos h-full'>
@@ -38,17 +30,15 @@ const Home: NextPage = () => {
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const res = await axios.get(
-//     `https://lensed-a67lw04nk-tahsinkarim.vercel.app/api/post`
-//   );
-//   const { data } = await res.data;
+export const getServerSideProps = async () => {
+  const res = await axios.get(`/api/post`);
+  const { data } = await res.data;
 
-//   return {
-//     props: {
-//       images: data,
-//     },
-//   };
-// };
+  return {
+    props: {
+      images: data,
+    },
+  };
+};
 
 export default Home;
