@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/images").then((res) => {
+    axios.get("/api/post").then((res) => {
       setImages(res.data);
     });
   }, []);
