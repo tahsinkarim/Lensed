@@ -15,7 +15,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       getPosts(req, res);
       break;
     case "POST":
-      // postPost(req, res);
+      postPost(req, res);
       break;
     case "PUT":
       res.status(200).json({ method, name: "put post" });

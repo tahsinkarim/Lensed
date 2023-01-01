@@ -1,13 +1,13 @@
 export interface ImageType {
   caption: string;
-  comments: {
+  comments?: {
     userId: string;
     comment: string;
     date: Date;
   }[];
-  date: Date;
+  date?: Date;
   image: string;
-  likes: {
+  likes?: {
     userId: string;
     date: Date;
   }[];
@@ -16,7 +16,7 @@ export interface ImageType {
     img: string;
     name: string;
   };
-  _id: string;
+  _id?: string;
 }
 
 export interface User {

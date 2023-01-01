@@ -2,6 +2,13 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 import axios from "axios";
 
+interface User {
+  name: string;
+  email: string;
+  avatar: string;
+  date?: Date;
+}
+
 const authStore = (set: any) => ({
   userProfile: null,
 

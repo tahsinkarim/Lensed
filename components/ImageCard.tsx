@@ -10,7 +10,7 @@ interface IProps {
 }
 
 const ImageCard: NextPage<IProps> = ({ post }) => {
-  const date: Date = new Date(post.date);
+  const date: Date = new Date(post.date!);
   const month: string = date.toLocaleString("default", { month: "short" });
   const day: string = date.toLocaleString("default", { day: "numeric" });
   const hour: string = date.toLocaleString("default", {
@@ -21,7 +21,7 @@ const ImageCard: NextPage<IProps> = ({ post }) => {
   console.log(formattedDate);
 
   return (
-    <div className='flex flex-col border-b-2 border-gray-200 pb-6 max-w-2xl mr-4'>
+    <div className='flex flex-col border-2 border-gray-200 pb-6 max-w-2xl rounded-lg'>
       <div>
         <div className='flex gap-3 p-2 cursor-pointer font-semibold rounded items-center'>
           <div className='md:w-12 md:h-12 w-10 h-10 relative'>
@@ -51,15 +51,16 @@ const ImageCard: NextPage<IProps> = ({ post }) => {
             </Link>
           </div>
         </div>
+        <p className='pl-4 pt-1 pb-3'>{post.caption && post.caption}</p>
       </div>
       <div className='flex gap-4 relative w-full'>
         <div className='rounded-xl relative w-full min-h-[180px] sm:h-[360px] md:h-[400px]'>
-          <Link href=''>
+          <Link href={`/detail/${post._id}`}>
             <Image
               src={post.image}
               fill={true}
               alt={"im"}
-              className='object-contain w-[200ox] lg:w-[600px] h-[300px]
+              className='object-cover w-full lg:w-[600px] h-[300px]
               md:h-[400px] lg:h-[530px] cursor-pointer bg-gray-200'
             />
           </Link>
