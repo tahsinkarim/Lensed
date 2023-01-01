@@ -35,15 +35,15 @@ const Home: NextPage = () => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
-  const { data } = await res.data;
+// export const getServerSideProps = async () => {
+//   const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
+//   const { data } = await res.data;
 
-  return {
-    props: {
-      images: data,
-    },
-  };
-};
+//   return {
+//     props: {
+//       images: data,
+//     },
+//   };
+// };
 
 export default Home;
