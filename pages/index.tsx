@@ -15,8 +15,13 @@ interface IProps {
   images: ImageType[];
 }
 
-const Home: NextPage = ({ images }: any) => {
-  console.log(images);
+const Home: NextPage = () => {
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    axios.get("/api/posts").then((response) => {
+      setImages(response.data);
+    });
+  }, []);
   return (
     <div className='flex flex-col gap-10 videos h-full'>
       {images?.length ? (
@@ -31,7 +36,7 @@ const Home: NextPage = ({ images }: any) => {
 };
 
 export const getServerSideProps = async () => {
-  const res = await axios.get(`https://sell-my-car-server.vercel.app/category`);
+  const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
   const { data } = await res.data;
 
   return {
