@@ -18,7 +18,7 @@ interface IProps {
 const Home: NextPage = () => {
   const [images, setImages] = useState([]);
   useEffect(() => {
-    axios.get("/api/posts").then((response) => {
+    axios.get("/api/post").then((response) => {
       setImages(response.data);
     });
   }, []);
