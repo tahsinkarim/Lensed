@@ -41,7 +41,7 @@ export default Home;
 
 export const getServerSideProps = async () => {
   const res = await axios.get(`/api/post`);
-  const data = await res.data;
+  const data = res.data;
 
   return {
     props: {
