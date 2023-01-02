@@ -15,7 +15,7 @@ interface IProps {
   images: ImageType[];
 }
 
-const Home: NextPage<IProps> = ({ images }) => {
+const Home: NextPage = ({ images }: any) => {
   // const [images, setImages] = useState([]);
 
   // useEffect(() => {
@@ -23,6 +23,7 @@ const Home: NextPage<IProps> = ({ images }) => {
   //     setImages(response.data);
   //   });
   // }, []);
+  console.log(images);
 
   return (
     <div className='flex flex-col gap-10 videos h-full'>
@@ -40,8 +41,9 @@ const Home: NextPage<IProps> = ({ images }) => {
 export default Home;
 
 export const getServerSideProps = async () => {
-  const res = await axios.get("/api/post");
+  const res = await axios.get("https://sell-my-car-server.vercel.app/category");
   const data = res.data;
+  const hello = "Hello";
 
   return {
     props: {

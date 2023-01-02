@@ -2,7 +2,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import connectMongo from "../../../database/connectDatabase";
 import { getPosts, postPost } from "../../../database/controller";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   connectMongo().catch(() =>
     res.status(405).json({ error: "Error in the connection" })
   );
