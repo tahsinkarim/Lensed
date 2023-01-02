@@ -40,7 +40,7 @@ const Home: NextPage<IProps> = ({ images }) => {
 export default Home;
 
 export const getServerSideProps = async () => {
-  const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
+  const res = await axios.get(`/api/post`);
   const data = await res.data;
 
   return {
