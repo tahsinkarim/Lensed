@@ -15,13 +15,15 @@ interface IProps {
   images: ImageType[];
 }
 
-const Home: NextPage = () => {
-  const [images, setImages] = useState([]);
-  useEffect(() => {
-    axios.get("/api/post").then((response) => {
-      setImages(response.data);
-    });
-  }, []);
+const Home: NextPage<IProps> = ({ images }) => {
+  // const [images, setImages] = useState([]);
+
+  // useEffect(() => {
+  //   axios.get("/api/post").then((response) => {
+  //     setImages(response.data);
+  //   });
+  // }, []);
+
   return (
     <div className='flex flex-col gap-10 videos h-full'>
       {images?.length ? (
@@ -35,15 +37,15 @@ const Home: NextPage = () => {
   );
 };
 
-// export const getServerSideProps = async () => {
-//   const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
-//   const { data } = await res.data;
-
-//   return {
-//     props: {
-//       images: data,
-//     },
-//   };
-// };
-
 export default Home;
+
+export const getServerSideProps = async () => {
+  const res = await axios.get(`https://lensed-psi.vercel.app/api/post`);
+  const data = await res.data;
+
+  return {
+    props: {
+      images: data,
+    },
+  };
+};
